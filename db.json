@@ -1,0 +1,90 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "events": [
+    {
+      "id": 3,
+      "text": "walk in the park",
+      "data": 1660462760
+    },
+    {
+      "id": 4,
+      "text": "party",
+      "data": 1657784360
+    },
+    {
+      "id": "1660656321",
+      "text": "1659560400"
+    },
+    {
+      "id": "1660656385",
+      "text": "1659474000"
+    },
+    {
+      "id": "1660656497",
+      "text": "time"
+    },
+    {
+      "id": "1660656559",
+      "text": "1659387600"
+    },
+    {
+      "id": "1660657149",
+      "text": "8"
+    },
+    {
+      "id": "1660657188",
+      "text": "2"
+    },
+    {
+      "id": "1660657450",
+      "text": "dssds",
+      "data": "1659301200"
+    },
+    {
+      "id": "1660659099",
+      "text": "",
+      "data": "1660078800"
+    },
+    {
+      "id": "1660659162",
+      "text": "sadghasd",
+      "data": "1659560400"
+    },
+    {
+      "id": "1660661389",
+      "text": "asdasd",
+      "data": "1660078800"
+    },
+    {
+      "id": "1660661402",
+      "text": "sdasd",
+      "data": "1660165200"
+    },
+    {
+      "id": "1660662040",
+      "text": "asdasd",
+      "data": "1662930000"
+    },
+    {
+      "id": "1660662057",
+      "text": "dsjadhjashdjdddddddddddddddddddddddddddddddd",
+      "data": "1660510800"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const LeftBoxUI = styled.div({
   height: "100%",
-  width: 30,
+  width: "3030px",
   overflow: "hidden",
 });
 function LeftBox() {

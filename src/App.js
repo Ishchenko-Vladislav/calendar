@@ -5,7 +5,7 @@ import RightBox from "./components/rightbox/calendarRightBox/rightbox";
 
 const CalendarWrapper = styled.div({
   display: "flex",
-  maxWidth: "800px",
+  width: "800px",
   height: "500px",
   margin: "0 auto",
   border: "1px solid black",
@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <CalendarWrapper>
-        <LeftBox />
+        {/* <LeftBox /> */}
         <RightBox />
       </CalendarWrapper>
     </>

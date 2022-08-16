@@ -32,9 +32,10 @@ export const CalendarNavigation = styled.div({
   justifyContent: "space-between",
 });
 export const RightBoxUI = styled.div({
-  minWidth: "750px",
+  minWidth: "100%",
   padding: "0px 0",
   position: "relative",
+  zIndex: "2",
 });
 export const DateMonth = styled.div`
   font-size: 30px;
@@ -132,7 +133,10 @@ export const CalendarCellBgUI = styled.div`
 `;
 
 export const CalendarCellUI = styled.div`
+  min-height: 76px;
+  min-width: 104px;
   padding: 2px 2px 2px 5px;
+  overflow: hidden;
   background: ${(props) => (props.month ? "#fff" : "#DDDDE0")};
 
   border-top: ${(props) => (props.today ? "3px solid blue" : "none")};
@@ -150,6 +154,7 @@ export const EventWindowBgUI = styled.div`
 `;
 
 export const EventWindowUI = styled.div`
+  z-index: 5;
   box-shadow: 0 0 4px black;
   width: 300px;
   height: 200px;
@@ -183,7 +188,7 @@ export const EventWindowInput = styled.input`
 export const EventWindowBtn = styled.div`
   display: flex;
   * {
-    padding: 0 20px;
+    margin: 0 10px;
   }
 `;
 export const EventWindowBtnSave = styled.button`
@@ -191,9 +196,43 @@ export const EventWindowBtnSave = styled.button`
   background: yellow;
   border: none;
 `;
+export const EventWindowBtnUpdate = styled.button`
+  padding: 10px 20px;
+  background: yellow;
+  border: none;
+`;
+export const EventWindowBtnDelete = styled.button`
+  padding: 10px 20px;
+  background: red;
+  border: none;
+`;
 
 export const EventWindowBtnClose = styled.button`
   padding: 10px 20px;
   background: red;
   border: none;
+`;
+
+export const EventTitle = styled.div`
+  height: 20px;
+  width: 90%;
+  /* height: 100%; */
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+`;
+
+export const EventTitleAnim = styled.div`
+  font-size: 14px;
+
+  white-space: nowrap;
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  /* width: 100%; */
+  /* height: 100%; */
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
