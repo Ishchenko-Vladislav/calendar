@@ -19,6 +19,7 @@ function EventWindow({
   changeText,
   createEvent,
   deleteEvent,
+  updateEvent,
 }) {
   return isShow ? (
     <EventWindowBgUI>
@@ -35,7 +36,11 @@ function EventWindow({
         <EventWindowBtn>
           {ss === "update" ? (
             <>
-              <EventWindowBtnUpdate onClick={(e) => {}}>
+              <EventWindowBtnUpdate
+                onClick={(e) => {
+                  updateEvent(ssText);
+                }}
+              >
                 Update
               </EventWindowBtnUpdate>
               <EventWindowBtnDelete

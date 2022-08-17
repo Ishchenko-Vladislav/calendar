@@ -6,9 +6,20 @@ import {
   EventTitle,
   EventTitleAnim,
 } from "../../UI/style";
+import CalendarDay from "../calendarDay/CalendarDay";
+import CalendarYear from "../calendarYear/CalendarYear";
 // import moment from "moment";
 
-function CalendarCell({ arrayCells, currentTime, ShowOpen, arrayUsers }) {
+function CalendarCell({
+  arrayCells,
+  currentTime,
+  ShowOpen,
+  arrayUsers,
+  render,
+  dayNow,
+  currentDay,
+  selectMonth,
+}) {
   const Handler = (e, type, date, text = "", id) => {
     ShowOpen(type, text, date, id);
     e.stopPropagation();
@@ -17,7 +28,10 @@ function CalendarCell({ arrayCells, currentTime, ShowOpen, arrayUsers }) {
     ShowOpen(type, text, date);
     e.stopPropagation();
   };
-  return (
+  const ShowDayHandler = (item) => {
+    return /[1-6]/.test(item);
+  };
+  return render == "month" ? (
     <CalendarCellBgUI>
       <CalendarCellsUI>
         {arrayCells.map((item, index) => (
@@ -39,7 +53,9 @@ function CalendarCell({ arrayCells, currentTime, ShowOpen, arrayUsers }) {
                 )
                 .map((item) => (
                   <EventTitle
-                    onClick={(e) => Handler(e, "update", 0, item.text, item.id)}
+                    onClick={(e) =>
+                      Handler(e, "update", item.data, item.text, item.id)
+                    }
                     key={item.id}
                   >
                     <EventTitleAnim>{item.text}</EventTitleAnim>
@@ -50,6 +66,14 @@ function CalendarCell({ arrayCells, currentTime, ShowOpen, arrayUsers }) {
         ))}
       </CalendarCellsUI>
     </CalendarCellBgUI>
+  ) : ShowDayHandler(render) ? (
+    <CalendarDay currentDay={currentDay} render={render} />
+  ) : render == "2" ? (
+    <div>2</div>
+  ) : render == "year" ? (
+    <CalendarYear selectMonth={selectMonth} currentDay={currentDay} />
+  ) : (
+    <div>everything</div>
   );
 }
 

@@ -49,7 +49,7 @@ export const CNLeftBox = styled.div({
   display: "flex",
   alignItems: "center",
 });
-export const CNRightBox = styled.div({
+export const CNRightBoxUI = styled.div({
   display: "flex",
   alignItems: "center",
 });
@@ -218,8 +218,12 @@ export const EventTitle = styled.div`
   width: 90%;
   /* height: 100%; */
   overflow: hidden;
+  background: #999;
+  margin-bottom: 2px;
   white-space: nowrap;
   position: relative;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
   cursor: pointer;
   user-select: none;
 `;
@@ -235,4 +239,67 @@ export const EventTitleAnim = styled.div`
   /* height: 100%; */
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const CalendarDayTitle = styled.div`
+  font-size: 20px;
+  font-weight: 500;
+`;
+
+export const CalendarDayUI = styled.div`
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(${(props) => props.count}, 1fr);
+  min-height: 86%;
+  overflow: auto;
+  grid-template-rows: 1fr;
+`;
+export const CalendarDayCellUI = styled.div`
+  /* display: flex; */
+  /* height: 100%; */
+  border-right: #999;
+`;
+
+export const CalendarYearUI = styled.div`
+  height: 450px;
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+  display: grid;
+  overflow: scroll;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 170px);
+`;
+
+export const CalendarMonthOfYearUI = styled.div`
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  cursor: pointer;
+  :hover {
+    background: #999;
+  }
+`;
+export const CalendarMonthOfYearTitleUI = styled.div`
+  font-size: 16px;
+`;
+export const CalendarMonthOfYearArrayUI = styled.div`
+  font-size: 16px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+`;
+
+export const CalendarDayOfArray = styled.div`
+  font-size: 12px;
+  opacity: ${(props) => (props.now ? "none" : 0)};
+`;
+
+export const CDWArray = styled.div`
+  display: grid;
+  font-size: 12px;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(7, 1fr);
 `;
