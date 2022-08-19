@@ -16,9 +16,10 @@ function CNRightBox({
   isSelect,
   renderHandler,
   render,
+  setCurrentDay,
 }) {
-  const optionHandler = (e) => {
-    renderHandler(e);
+  const optionHandler = (day, e) => {
+    renderHandler(day, e);
     // console.log(e);
   };
   return (
@@ -26,6 +27,7 @@ function CNRightBox({
       <CNDayBtn
         onClick={(e) => {
           setDayNow(moment());
+          setCurrentDay(moment());
         }}
         toDay
       >
@@ -36,7 +38,7 @@ function CNRightBox({
       <CNDayBtnView onClick={(e) => e.stopPropagation()}>
         <CNDayBtn
           onClick={(e) => {
-            optionHandler("1");
+            optionHandler("day", 1);
           }}
         >
           <ion-icon name="today-outline"></ion-icon>
@@ -52,7 +54,7 @@ function CNRightBox({
         </CNDayBtnSelect>
         <CNDayBtnOptions
           onClick={(e) => {
-            optionHandler(e.target.id);
+            optionHandler("day", e.target.id);
             selectToggle(isSelect);
           }}
           isSelect={isSelect}

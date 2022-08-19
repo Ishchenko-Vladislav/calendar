@@ -23,6 +23,8 @@ import CNRightBox from "../CNRightBox/CNRightBox";
 import CalendarDay from "../calendarDay/CalendarDay";
 
 function RightBox() {
+  moment.updateLocale("en", { week: { dow: 6 } });
+
   const [isSelect, setSelect] = useState(false);
   const [isShow, setShow] = useState(false);
   const [ss, setSS] = useState("");
@@ -30,15 +32,11 @@ function RightBox() {
   const [ssText, setSSText] = useState("");
   const [arrayUsers, setArrayUsers] = useState([]);
   const [dayNow, setDayNow] = useState(moment());
-  const [currentDay, setCurrentDay] = useState(moment());
+  const [currentDay, setCurrentDay] = useState(moment().clone());
   const [dateCreate, setDateCreate] = useState(0);
   const [render, setRender] = useState("month");
-
-  // const arrayUsers = [
-  //   { id: 1, text: "walk in the parks sds dsds", data: 1660559960 },
-  //   { id: 2, text: "walk in the park", data: 1660549160 },
-  //   { id: 3, text: "walk in the park", data: 1660462760 },
-  // ];
+  const [DayOf, setDayOf] = useState(1);
+  window.moment = moment();
   window.arrayUsers = arrayUsers;
   async function setIvent() {
     const array = await axios.get(
@@ -48,8 +46,7 @@ function RightBox() {
   }
   useEffect(() => {
     setIvent();
-  }, [dayNow, isShow]);
-
+  }, [dayNow, isShow, DayOf, currentDay]);
   useEffect(() => {
     document.addEventListener("click", (e) => setSelect(false));
 
@@ -57,60 +54,60 @@ function RightBox() {
       document.removeEventListener("click", (e) => setSelect(false));
     };
   }, []);
-  const selectToggle = (select) => {
+  const selectToggle = () => {
     return setSelect((prevSelect) => !prevSelect);
   };
   const firstDayCell = dayNow.clone().startOf("month").startOf("week");
-  // const lastDay = moment().clone().endOf("month").endOf("week");
   const startDay = firstDayCell.clone().format("X");
   const lastDay = firstDayCell.clone().add(42, "day").format("X");
   const currentTime = moment().clone();
   const arrayCells = [...Array(42)].map(() =>
     firstDayCell.add(1, "day").clone()
   );
+  window.arrayCells = arrayCells;
   const changeHandler = (type) => {
     switch (type) {
-      case "upMonth":
+      case "month":
         setDayNow((prev) => prev.clone().add(1, "month"));
+        setCurrentDay((prev) => prev.clone().add(1, "month"));
+
         break;
-      case "downMonth":
+      case "monthDown":
         setDayNow((prev) => prev.clone().subtract(1, "month"));
+        setCurrentDay((prev) => prev.clone().subtract(1, "month"));
 
         break;
-      case "upYear":
+      case "year":
+        // console.log("upYear");
         setDayNow((prev) => prev.clone().add(1, "year"));
+        setCurrentDay((prev) => prev.clone().add(1, "year"));
+        break;
+      case "yearDown":
+        setCurrentDay((prev) => prev.clone().subtract(1, "year"));
+        setDayNow((prev) => prev.clone().subtract(1, "year"));
 
         break;
-      case "downYear":
-        setDayNow((prev) => prev.clone().subtract(1, "year"));
-        break;
-      case "upWeek":
+      case "week":
+        setCurrentDay((prev) => prev.clone().add(1, "week"));
         setDayNow((prev) => prev.clone().add(1, "week"));
         break;
-      case "downWeek":
+      case "weekDown":
+        setCurrentDay((prev) => prev.clone().subtract(1, "week"));
         setDayNow((prev) => prev.clone().subtract(1, "week"));
+        break;
+      case "day":
+        setDayNow((prev) => prev.clone().add(DayOf, "day"));
+        setCurrentDay((prev) => prev.clone().add(DayOf, "day"));
+
+        break;
+      case "dayDown":
+        setDayNow((prev) => prev.clone().subtract(DayOf, "day"));
+        setCurrentDay((prev) => prev.clone().subtract(DayOf, "day"));
+
         break;
       default:
         break;
     }
-  };
-  const upMonth = () => {
-    setDayNow((prev) => prev.clone().add(1, "month"));
-  };
-  const downMonth = () => {
-    setDayNow((prev) => prev.clone().subtract(1, "month"));
-  };
-  const upYear = () => {
-    setDayNow((prev) => prev.clone().add(1, "year"));
-  };
-  const downYear = () => {
-    setDayNow((prev) => prev.clone().add(1, "year"));
-  };
-  const upWeek = () => {
-    setDayNow((prev) => prev.clone().add(1, "year"));
-  };
-  const downWeek = () => {
-    setDayNow((prev) => prev.clone().add(1, "year"));
   };
   const ShowOpen = (type, text, date, id) => {
     setSSId(id);
@@ -159,8 +156,9 @@ function RightBox() {
     const eventObj = eventTemplate(text);
     axios.delete(`http://localhost:5000/events/${ssId}`);
   };
-  const renderHandler = (type) => {
+  const renderHandler = (type, e) => {
     setRender(type);
+    setDayOf(e);
   };
   const selectMonth = (month) => {
     setRender("month");
@@ -186,10 +184,9 @@ function RightBox() {
           changeHandler={changeHandler}
           render={render}
           dayNow={dayNow}
-          upMonth={upMonth}
-          downMonth={downMonth}
         />
         <CNRightBox
+          setCurrentDay={setCurrentDay}
           render={render}
           renderHandler={renderHandler}
           isSelect={isSelect}
@@ -210,6 +207,7 @@ function RightBox() {
       ) : null}
 
       <CalendarCell
+        DayOf={DayOf}
         selectMonth={selectMonth}
         currentDay={currentDay}
         render={render}

@@ -154,7 +154,6 @@ export const EventWindowBgUI = styled.div`
 `;
 
 export const EventWindowUI = styled.div`
-  z-index: 5;
   box-shadow: 0 0 4px black;
   width: 300px;
   height: 200px;
@@ -164,6 +163,7 @@ export const EventWindowUI = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 50;
 `;
 
 export const EventWindowTitleUI = styled.div`
@@ -212,52 +212,57 @@ export const EventWindowBtnClose = styled.button`
   background: red;
   border: none;
 `;
-
+///////////////////////////////////////////////////////////////////////////////////
 export const EventTitle = styled.div`
   height: 20px;
-  width: 90%;
-  /* height: 100%; */
   overflow: hidden;
   background: #999;
+  margin-top: 2px;
   margin-bottom: 2px;
   white-space: nowrap;
-  position: relative;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   cursor: pointer;
   user-select: none;
+  z-index: 1;
 `;
 
 export const EventTitleAnim = styled.div`
   font-size: 14px;
-
   white-space: nowrap;
-  /* position: absolute; */
-  top: 0;
-  left: 0;
-  /* width: 100%; */
-  /* height: 100%; */
   overflow: hidden;
   text-overflow: ellipsis;
 `;
 
 export const CalendarDayTitle = styled.div`
-  font-size: 20px;
+  font-size: 12px;
   font-weight: 500;
+  border-bottom: 1px solid black;
+  line-height: 40px;
 `;
 
 export const CalendarDayUI = styled.div`
   display: grid;
   justify-content: space-between;
-  grid-template-columns: repeat(${(props) => props.count}, 1fr);
+  /* width: ${(props) => props.count / 800}px; */
+  grid-template-columns: repeat(
+    ${(props) => props.count},
+    ${(props) => 800 / props.count}px
+  );
+
   min-height: 86%;
   overflow: auto;
   grid-template-rows: 1fr;
 `;
+
 export const CalendarDayCellUI = styled.div`
-  /* display: flex; */
-  /* height: 100%; */
-  border-right: #999;
+  padding: 0 10px;
+  :hover {
+  }
+  :not(:last-child) {
+    border-right: 1px solid black;
+  }
+  border-top: 1px solid black;
 `;
 
 export const CalendarYearUI = styled.div`

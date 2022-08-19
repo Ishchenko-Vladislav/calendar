@@ -19,6 +19,7 @@ function CalendarCell({
   dayNow,
   currentDay,
   selectMonth,
+  DayOf,
 }) {
   const Handler = (e, type, date, text = "", id) => {
     ShowOpen(type, text, date, id);
@@ -43,7 +44,9 @@ function CalendarCell({
             key={index}
           >
             {index === 0 ? `${item.format("MM")}/` : ""}
-            {item.format("D")}
+            {item.format("D") == 1
+              ? `${item.format("D")}/${item.format("M")}`
+              : item.format("D")}
             <div>
               {arrayUsers
                 .filter(
@@ -66,10 +69,23 @@ function CalendarCell({
         ))}
       </CalendarCellsUI>
     </CalendarCellBgUI>
-  ) : ShowDayHandler(render) ? (
-    <CalendarDay currentDay={currentDay} render={render} />
-  ) : render == "2" ? (
-    <div>2</div>
+  ) : render == "day" ? (
+    <CalendarDay
+      dayNow={dayNow}
+      ShowOpen={ShowOpen}
+      arrayUsers={arrayUsers}
+      currentDay={currentDay}
+      DayOf={DayOf}
+      render={render}
+    />
+  ) : render == "week" ? (
+    <CalendarDay
+      dayNow={dayNow}
+      ShowOpen={ShowOpen}
+      arrayUsers={arrayUsers}
+      currentDay={currentDay}
+      DayOf={7}
+    />
   ) : render == "year" ? (
     <CalendarYear selectMonth={selectMonth} currentDay={currentDay} />
   ) : (
